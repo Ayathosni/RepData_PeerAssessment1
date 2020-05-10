@@ -49,6 +49,8 @@ hist(sum_data$total,
      xlab="Total number of steps", 
      ylim=c(0, 20), 
      main="Histogram of the total number of steps taken each day\n(NA removed)")
+mean(sum_data$total)
+median(sum_data$total)
 
 ## What is the average daily activity pattern?
 # Compute the means of steps accross all days for each interval
@@ -69,7 +71,14 @@ plot(mean_data$interval,
      ylab="Average number of steps", 
      main="Time-series of the average number of steps per intervals\n(NA removed)")
      
+# We find the position of the maximum mean
+max_pos <- which(mean_data$mean == max(mean_data$mean))
 
+# We lookup the value of interval at this position
+max_interval <- mean_data[max_pos, 1]
+
+# Clear the workspace
+rm(max_pos, mean_data)
 
 ## Inputing missing values
 # We use the trick that a TRUE boolean value is equivalent to 1 and a FALSE to 0.
@@ -97,7 +106,9 @@ hist(sum_data$total,
      xlab="Total number of steps", 
      ylim=c(0, 30), 
      main="Histogram of the total number of steps taken each day\n(NA replaced by mean value)")
-     
+ 
+ mean(sum_data$total)
+median(sum_data$total)
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
